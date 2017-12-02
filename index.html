@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Starwars Soundboard - Bob Minteer</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+    <div id="darth" data-key="65" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="luke" data-key="83" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="leia" data-key="68" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="han" data-key="70" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="chewy" data-key="71" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="r2d2" data-key="72" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="c3po" data-key="76" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="obiwan" data-key="74" class="key">
+        <span class="sound"></span>
+    </div>
+    <div id="lightsaber" data-key="75" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="xwing2" data-key="200" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="tiefighter" data-key="201" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="xwing3" data-key="202" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="deathstar" data-key="203" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="lukeblaster" data-key="204" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="imperialblaster" data-key="205" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="soloblaster" data-key="206" class="key">
+        <span class="sound"></span>
+    </div>
+      <div id="tarkin" data-key="207" class="key">
+        <span class="sound"></span>
+    </div>
+
+  <audio data-key="65" src="sounds/swvader02.wav"></audio>
+    <audio data-key="83" src="sounds/badfeeling.wav"></audio>
+    <audio data-key="68" src="sounds/nerfherder.wav"></audio>
+    <audio data-key="70" src="sounds/laughfuzzball.wav"></audio>
+    <audio data-key="71" src="sounds/chewy_roar.wav"></audio>
+    <audio data-key="72" src="sounds/R2D2.wav"></audio>
+    <audio data-key="74" src="sounds/disturbance.wav"></audio>
+    <audio data-key="75" src="sounds/light-saber-on.wav"></audio>
+    <audio data-key="76" src="sounds/madness.wav"></audio>
+    <audio data-key="200" src="sounds/xwing2.wav"></audio>
+    <audio data-key="201" src="sounds/tiefighter.wav"></audio>
+    <audio data-key="202" src="sounds/xwing3.wav"></audio>
+    <audio data-key="203" src="sounds/deathstarlaser.wav"></audio>
+    <audio data-key="204" src="sounds/soloblaster.wav"></audio>
+    <audio data-key="205" src="sounds/imperialblaster.wav"></audio>
+    <audio data-key="206" src="sounds/soloblaster.wav"></audio>
+    <audio data-key="207" src="sounds/firewhenready.wav"></audio>
+
+        <script>
+    function removeTransition(e) {
+        if (e.propertyName !== 'transform') return;
+        e.target.classList.remove('playing');
+    }
+
+    function playSound(e) {
+
+        console.log(e);
+
+        // type = keydown
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+
+        if (!audio) return;
+
+        key.classList.add('playing');
+        audio.currentTime = 0;
+        audio.play();
+    }
+
+    function playSound2(e) {
+
+        console.log(e);
+
+        // we clicked a div
+        const audio = document.querySelector(`audio[data-key="${e.target.dataset.key}"]`);
+        const key = document.querySelector(`div[data-key="${e.target.dataset.key}"]`);
+
+        //console.log(e.explicitOriginalTarget);
+
+        if (!audio) return;
+
+        key.classList.add('playing');
+        audio.currentTime = 0;
+        audio.play();
+    }
+
+    const keys = Array.from(document.querySelectorAll('.key'));
+
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    keys.forEach(key => key.addEventListener('click', playSound2));
+
+    window.addEventListener('keydown', playSound);
+    </script>
+    <!--Having fun with code.   Bob Minteer -  SmartPCGuy@gmail.com -->
+</body>
+
+</html>
